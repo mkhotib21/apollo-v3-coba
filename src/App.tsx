@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloProvider } from "@apollo/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-function App() {
+import { client } from "./helpers/client";
+import Routes from "./routes";
+import InfinitePagination from "./routes/infinite-pagination";
+import CacheWritePagination from "./routes/infinite-pagination-cache-read-write";
+import RegularPagination from "./routes/pagination";
+
+const router = createBrowserRouter([
+  { path: "/", element: <Routes /> },
+  { path: "/pagination", element: <RegularPagination /> },
+  { path: "/infinite-pagination", element: <InfinitePagination /> },
+  { path: "/cache-write-pagination", element: <CacheWritePagination /> },
+]);
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   );
-}
+};
 
 export default App;

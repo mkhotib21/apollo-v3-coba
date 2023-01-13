@@ -1,0 +1,10 @@
+query {
+  traktiran: product_list(type: "traktiran") {
+    id
+    name
+  }
+  kejar_diskon: product_list(type: "kejar-diskon") {
+    id
+    name
+  }
+}
